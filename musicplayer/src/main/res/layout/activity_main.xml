@@ -4,62 +4,68 @@
     android:layout_height="match_parent">
 <!--    底部栏内容布局-->
     <RelativeLayout
+        android:id="@+id/local_music_bottomlayout"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
-        android:id="@+id/local_music_bottomlayout"
-        android:background="#33EEEEEE">
+        android:background="@color/colorPrimary">
+        <!--        <ProgressBar-->
+        <!--            android:layout_centerHorizontal="true"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_above="@+id/local_music_botton_icon_music"-->
+        <!--            android:layout_height="40px"-->
+        <!--            android:layout_marginBottom="5px"/>-->
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="#9933FA"/>
+            android:background="#9933FA" />
         <!--        音乐图标，用来显示专辑图片（虽然我实际上也不会改就是了-->
         <ImageView
+            android:id="@+id/local_music_botton_icon_music"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@mipmap/music"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:id="@+id/local_music_botton_icon_music"/>
-<!--        显示歌名-->
+            android:src="@mipmap/music" />
+        <!--        显示歌名-->
         <TextView
             android:id="@+id/local_music_botton_text_song"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:layout_toRightOf="@id/local_music_botton_icon_music"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/local_music_botton_icon_music"
+            android:text=""
             android:textSize="16sp"
-            android:textStyle="bold"/>
-<!--        显示歌手-->
+            android:textStyle="bold" />
+        <!--        显示歌手-->
         <TextView
             android:id="@+id/local_music_botton_text_singer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="12sp"
             android:layout_below="@id/local_music_botton_text_song"
             android:layout_alignLeft="@+id/local_music_botton_text_song"
-            android:layout_marginTop="10dp"/>
-<!--        后面两个从右往左绘制，下一个按钮-->
+            android:layout_marginTop="10dp"
+            android:text=""
+            android:textSize="12sp" />
+        <!--        后面两个从右往左绘制，下一个按钮-->
         <ImageView
             android:id="@+id/local_music_botton_icon_next"
             android:layout_width="65dp"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/next"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"/>
-<!--        播放/暂停按钮位置-->
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/next" />
+        <!--        播放/暂停按钮位置-->
         <ImageView
             android:id="@+id/local_music_botton_icon_start"
             android:layout_width="65dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@mipmap/start"
+            android:layout_marginRight="30dp"
             android:layout_toLeftOf="@+id/local_music_botton_icon_next"
-            android:layout_marginRight="30dp"/>
+            android:src="@mipmap/start" />
     </RelativeLayout>
 <!--    播放布局-->
     <androidx.recyclerview.widget.RecyclerView

@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        创建适配器
         adapter = new LocalMusicAdapter(this, mDataes);//因为以后会有数据更新，所以要作为成员变量来写
         musicRv.setAdapter(adapter);
+
         //设置布局管理器，选择linearlayout的展示形式
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         musicRv.setLayoutManager(layoutManager);
@@ -87,9 +88,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //    播放音乐（两种情况：从暂停开始播放，从0开始播放
     private void startPlaying() {
+//        Toast.makeText(this,playingPosition,Toast.LENGTH_SHORT).show();
         if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
             //先判断是不是暂停状况
-            if (playingPosition == 0) {//从0开始
+            if (pausePosition == 0) {//从0开始
                 try {
                     mediaPlayer.prepare();//先准备
                     mediaPlayer.start();
@@ -190,7 +192,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 //                点击下一首按钮
             case R.id.local_music_botton_icon_next:
-
+//                if(playingPosition == mDataes.size()){//最后一首的情况下
+//                    playingPosition=1;
+//                    LocalMusicBean lastBean = mDataes.get(playingPosition);
+//
+//                }
                 break;
         }
     }

@@ -15,7 +15,7 @@ public class LocalMusicAdapter extends RecyclerView.Adapter<LocalMusicAdapter.Lo
     //传入数据源，首先获取容器，再获取数据源
     Context context;
     List<LocalMusicBean>mDatas;
-//因为传歌名什么的太麻烦，所以用接口回调的方式来进行操作
+    //因为传歌名什么的太麻烦，所以用接口回调的方式来进行操作
     OnItemClickListener onItemClickListener;
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -24,7 +24,7 @@ public class LocalMusicAdapter extends RecyclerView.Adapter<LocalMusicAdapter.Lo
 
     public interface OnItemClickListener{
         public void OnItemClick(View view,int position);
-}
+    }
 
     public LocalMusicAdapter(Context context, List<LocalMusicBean> mDatas) {
         this.context = context;
@@ -40,7 +40,7 @@ public class LocalMusicAdapter extends RecyclerView.Adapter<LocalMusicAdapter.Lo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LocalMusicViewHolder holder, final int position) {//绑定holder
+    public void onBindViewHolder(@NonNull LocalMusicViewHolder holder,final int position) {//绑定holder
         LocalMusicBean musicBean = mDatas.get(position);
         holder.idTv.setText(musicBean.getId());
         holder.songTv.setText(musicBean.getSong());
