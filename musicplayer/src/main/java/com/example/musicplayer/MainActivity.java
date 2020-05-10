@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
         initView();
         mediaPlayer = new MediaPlayer();
         mDataes = new ArrayList<>();
@@ -69,21 +70,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                因为后面也要用到这个位置，所以建议记录成一个成员变量
                 playingPosition = position;
                 LocalMusicBean musicBean = mDataes.get(position);
-//                设置底部显示的歌手名和歌名
-                singerTv.setText(musicBean.getSinger());
-                songTv.setText(musicBean.getSong());
-                stopPlaying();//应该先停止
-                //先重置，再暂停再播放
-                mediaPlayer.reset();
-                //设置新的播放路径
-                try {
-                    mediaPlayer.setDataSource(musicBean.getPath());
-                    startPlaying();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                playMusicPosition(musicBean);
             }
         });
+    }
+//被封装出来的方法，用于设置播放音乐的bean
+    //根据传入对象播放音乐
+    public void playMusicPosition(LocalMusicBean musicBean) {
+        //                设置底部显示的歌手名和歌名
+        singerTv.setText(musicBean.getSinger());
+        songTv.setText(musicBean.getSong());
+        stopPlaying();//应该先停止
+        //先重置，再暂停再播放
+        mediaPlayer.reset();
+        //设置新的播放路径
+        try {
+            mediaPlayer.setDataSource(musicBean.getPath());
+            startPlaying();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //    播放音乐（两种情况：从暂停开始播放，从0开始播放
@@ -192,11 +198,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 //                点击下一首按钮
             case R.id.local_music_botton_icon_next:
-//                if(playingPosition == mDataes.size()){//最后一首的情况下
-//                    playingPosition=1;
-//                    LocalMusicBean lastBean = mDataes.get(playingPosition);
-//
-//                }
+                if (playingPosition == -1){//没选任何一首就开始想播放
+                    Toast.makeText(this, "先选择要播放的音乐", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(playingPosition == mDataes.size()-1){//最后一首的情况下,注意是角标，所以要减一
+                    Toast.makeText(this,"已经是最后一首了，即将回到第一首",Toast.LENGTH_SHORT).show();
+                    playingPosition=0;
+                    LocalMusicBean firstBean = mDataes.get(playingPosition);
+                    playMusicPosition(firstBean);
+                }else {//选择了歌曲并且不是最后一首的情况下，点击下一首就应该把playingPosition++
+                    playingPosition++;
+                    LocalMusicBean firstBean = mDataes.get(playingPosition);
+                    playMusicPosition(firstBean);
+                }
                 break;
         }
     }
